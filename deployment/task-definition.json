@@ -1,0 +1,24 @@
+{
+    "family": "hello-world-task",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+            "name": "hello-world-container",
+            "image": "<account-id>.dkr.ecr.<region>.amazonaws.com/hello-world-ecs:latest",
+            "cpu": 256,
+            "memory": 512,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ]
+        }
+    ],
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "<execution-role-arn>"
+}

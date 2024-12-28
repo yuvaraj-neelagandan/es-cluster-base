@@ -1,0 +1,11 @@
+{
+    "name": "hello-world-ecs",
+    "version": "1.0.0",
+    "description": "A Hello World Node.js application for AWS ECS",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {}
+  }
+  

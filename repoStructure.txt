@@ -1,0 +1,39 @@
+hello-world-ecs/
+├── app.js
+├── Dockerfile
+├── package.json
+├── deployment/
+│   ├── task-definition.json
+│   ├── README.md
+└── README.md
+
+---
+
+Register Task Definition
+
+aws ecs register-task-definition --cli-input-json file://task-definition.json
+
+Create ECS Service
+
+aws ecs create-service \
+    --cluster hello-world-cluster \
+    --service-name hello-world-service \
+    --task-definition hello-world-task \
+    --desired-count 1 \
+    --launch-type FARGATE \
+    --network-configuration "awsvpcConfiguration={subnets=[<subnet-id>],securityGroups=[<sg-id>],assignPublicIp=ENABLED}"
+
+Test the Application
+
+aws ecs list-tasks --cluster hello-world-cluster
+aws ecs describe-tasks --cluster hello-world-cluster --tasks <task-id>
+
+
+Access the application at:
+http://<public-ip>:3000
+
+5. Clean Up Resources
+aws ecs delete-service --cluster hello-world-cluster --service hello-world-service --force
+aws ecs delete-cluster --cluster hello-world-cluster
+aws ecr delete-repository --repository-name hello-world-ecs --force
+
